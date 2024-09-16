@@ -39,6 +39,7 @@ Para realizar o treinamento do yolo para detectar um objeto específico, foram r
 	o yolo8.
 3. Treinamento da rede yolo8 com o dataset criado na etapa anterior usando o script "yolo8_trainning.py".
 	- O script "yolo8_trainning.py" aceita os seguintes parâmetros:
+	
 ```
 usage: yolo8_trainning.py [-h] [-e EPOCHS] [-t CLASS_NAME VIDEO] dataset
 
@@ -56,18 +57,19 @@ optional arguments:
                         onde será realizada a detecção
 ```
 
-	- Para o caso específico de detecão de fardos, o Roboflow gerou o arquivo "hercules.v1i.yolov8.zip". Esse arquivo foi descampactado 
-	na pasta "datasets", sem nenhuma pasta intermediária. *ATENÇÃO*: o yolo exige que os datasets customizados estejam na pasta "dataset".
+	- Para o caso específico de detecão de fardos, o Roboflow gerou o arquivo "hercules.v1i.yolov8.zip". Esse arquivo foi descompactado 
+	na pasta "datasets", sem nenhuma pasta intermediária. **ATENÇÃO**: o yolo exige que os datasets customizados estejam na pasta "datasets".
 	- Exemplos de execução de treinamento:
 	
 ```
 python3 yolo8_trainning.py datasets/data.yaml --epochs=5 --test bale videos/5.mp4
 
 ```
-4. Ao terminar a execução do treinamento, o arquivo com os pesos otimizados para detecção de objeto específico usando o Yolo estará em uma das subpastas da pasta "runs", sob o nome *"best.pt"*
-	- Para o caso específico de detecão de fardos, o treinamento foi feito com o parâmetro de 500 épocas e gerou um arquivo de pesos. Esse arquivo foi renomeado para "hercules500.pt" e se encontra na raiz do repositório. Esse arquivo é utilizado pelo processo de detecção descrito na próxima seção. 
+
+4. Ao terminar a execução do treinamento, o arquivo com os pesos otimizados para detecção de objeto específico usando o Yolo estará em uma das subpastas da pasta "runs", sob o nome **"best.pt"**
+	- Para o caso específico de detecão de fardos, o treinamento foi feito com o parâmetro de 500 épocas e gerou um arquivo de pesos. Esse arquivo foi renomeado para "hercules500.pt" e se encontra na raiz do repositório. Ele é utilizado pelo processo de detecção descrito na próxima seção. 
 	
-*Não há necessidade de regerar o modelo se apenas se quer realizar o processo de detecção*.
+**Não há necessidade de regerar o modelo se apenas se quer realizar o processo de detecção**.
 
 ## Detecção das pilhas de fardos usando o Yolo v8
 
@@ -87,6 +89,7 @@ optional arguments:
 ```
 
 A pasta videos contém 5 videos que podem ser usados para testar o processo de detecção. Abaixo um exemplo de uso do script:
+
 ```
 python3 bale_yolo8_detection.py videos/5.mp4 
 
