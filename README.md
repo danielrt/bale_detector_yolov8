@@ -1,0 +1,1 @@
+# bale_detector_yolov8
