@@ -38,6 +38,8 @@ Para realizar o treinamento do yolo para detectar um objeto específico, foram r
 	como a ferramenta pode ser usada para criar classes de objetos, anotar as imagens e exportar um dataset que será usado para treinar 
 	o yolo8.
 3. Treinamento da rede yolo8 com o dataset criado na etapa anterior usando o script "yolo8_trainning.py".
+	- Para o caso específico de detecão de fardos, o Roboflow gerou o arquivo "hercules.v1i.yolov8.zip". Esse arquivo foi descompactado 
+	na pasta "datasets", sem nenhuma pasta intermediária. **ATENÇÃO**: o yolo exige que os datasets customizados estejam na pasta "datasets".
 	- O script "yolo8_trainning.py" aceita os seguintes parâmetros:
 	
 ```
@@ -55,13 +57,9 @@ optional arguments:
   -t CLASS_NAME VIDEO, --test CLASS_NAME VIDEO
                         indica que depois de realizado o treinamento, uma etapda de testes de detecção será executada. Como parâmetros devem ser indicados a classe do objeto a ser detectado e o video
                         onde será realizada a detecção
-```
 
-	- Para o caso específico de detecão de fardos, o Roboflow gerou o arquivo "hercules.v1i.yolov8.zip". Esse arquivo foi descompactado 
-	na pasta "datasets", sem nenhuma pasta intermediária. **ATENÇÃO**: o yolo exige que os datasets customizados estejam na pasta "datasets".
-	- Exemplos de execução de treinamento:
-	
-```
+Exemplo de uso do script de treinamento:
+
 python3 yolo8_trainning.py datasets/data.yaml --epochs=5 --test bale videos/5.mp4
 
 ```
