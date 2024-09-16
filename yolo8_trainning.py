@@ -13,7 +13,7 @@ def getColours(cls_num):
     return tuple(color)
 
 
-def main(dataset, cn, nepochs, videoForTest):
+def main(dataset, nepochs, testArgs):
     # Carrega um dos modelos pré-treinados da ultralytics.
     # O modelo abaixo (yolov8s.pt) é o segundo em desempenho
     model = YOLO('yolov8s.pt')
@@ -35,7 +35,10 @@ def main(dataset, cn, nepochs, videoForTest):
 
     # caso um arquivo de video tenha sido fornecido, realiza a detecção do objeto para o qual foi realizado o
     # treinamento
-    if videoForTest:
+    if testArgs:
+    
+        cn = testArgs[0]
+        videoForTest = testArgs[1]
 
         # carrega o video
         videoCap = cv2.VideoCapture(videoForTest)
@@ -106,11 +109,9 @@ def main(dataset, cn, nepochs, videoForTest):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Treinamento Yolo v8 com dataset customizado')
     parser.add_argument('dataset', default=None, help='caminho para o arquivo .yaml para o dataset customizado. O dataset deve estar localizado na pasta datasets')
-    parser.add_argument('class_name', default=None, help='nome da classe de objeto que se quer detectar')
     parser.add_argument('-e', '--epochs', default=500, help='número de épocas a serem usadas no treinamento', type=int)
-    parser.add_argument('-v', '--video', default=None, help='arquivo de video no qual será feita a detecção')
+    parser.add_argument('-t', '--test', nargs=2, metavar=('CLASS_NAME', 'VIDEO'), default=None, help='indica que depois de realizado o treinamento, uma etapda de testes de detecção será executada. Como parâmetros devem ser indicados a classe do objeto a ser detectado e o video onde será realizada a detecção')
 
     
     args = parser.parse_args()
-    print(args.dataset, args.class_name, args.epochs)
-    main(args.dataset, args.class_name, args.epochs, args.video)
+    main(args.dataset, args.epochs, args.test)
